@@ -48,5 +48,6 @@ public class StudentInformationSystem {
         System.out.printf("Total Study Hours Per Semester: %.0f\n", totalStudyHoursPerSemester);
     }
 }
+//test
 
 
