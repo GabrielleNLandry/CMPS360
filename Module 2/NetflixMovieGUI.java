@@ -12,73 +12,64 @@ public class NetflixMovieGUI {
     private JButton submitButton, clearButton;
     
     public NetflixMovieGUI() {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         frame = new JFrame("Netflix Movie Management");
-        frame.setSize(400, 500);
+        frame.setSize(500, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new GridLayout(14, 2));
+        frame.setLayout(new BorderLayout());
         
-        frame.add(new JLabel("Content Type:"));
-        contentTypeBox = new JComboBox<>(new String[]{"Movie", "Series"});
-        frame.add(contentTypeBox);
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        panel.setBorder(BorderFactory.createTitledBorder("Enter Movie Details"));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         
-        frame.add(new JLabel("Title:"));
-        titleField = new JTextField();
-        frame.add(titleField);
+        String[] labels = {"Content Type:", "Title:", "Genre:", "Release Year:", "Director:", "Main Actor:", "Main Actress:", "Language:", "Duration (min):", "IMDb Rating:", "Viewer Restriction:", "Number of Seasons:", "Number of Episodes:"};
+        JComponent[] components = {
+            contentTypeBox = new JComboBox<>(new String[]{"Movie", "Series"}),
+            titleField = new JTextField(),
+            genreField = new JTextField(),
+            yearField = new JTextField(),
+            directorField = new JTextField(),
+            actorField = new JTextField(),
+            actressField = new JTextField(),
+            languageField = new JTextField(),
+            durationField = new JTextField(),
+            ratingField = new JTextField(),
+            ageRestrictionField = new JTextField(),
+            seasonsField = new JTextField(),
+            episodesField = new JTextField()
+        };
         
-        frame.add(new JLabel("Genre:"));
-        genreField = new JTextField();
-        frame.add(genreField);
+        for (int i = 0; i < labels.length; i++) {
+            gbc.gridx = 0;
+            gbc.gridy = i;
+            panel.add(new JLabel(labels[i]), gbc);
+            
+            gbc.gridx = 1;
+            components[i].setPreferredSize(new Dimension(200, 25));
+            panel.add(components[i], gbc);
+        }
         
-        frame.add(new JLabel("Release Year:"));
-        yearField = new JTextField();
-        frame.add(yearField);
-        
-        frame.add(new JLabel("Director:"));
-        directorField = new JTextField();
-        frame.add(directorField);
-        
-        frame.add(new JLabel("Main Actor:"));
-        actorField = new JTextField();
-        frame.add(actorField);
-        
-        frame.add(new JLabel("Main Actress:"));
-        actressField = new JTextField();
-        frame.add(actressField);
-        
-        frame.add(new JLabel("Language:"));
-        languageField = new JTextField();
-        frame.add(languageField);
-        
-        frame.add(new JLabel("Duration (min):"));
-        durationField = new JTextField();
-        frame.add(durationField);
-        
-        frame.add(new JLabel("IMDb Rating:"));
-        ratingField = new JTextField();
-        frame.add(ratingField);
-        
-        frame.add(new JLabel("Viewer Restriction:"));
-        ageRestrictionField = new JTextField();
-        frame.add(ageRestrictionField);
-        
-        frame.add(new JLabel("Number of Seasons:"));
-        seasonsField = new JTextField();
-        seasonsField.setEnabled(false);
-        frame.add(seasonsField);
-        
-        frame.add(new JLabel("Number of Episodes:"));
-        episodesField = new JTextField();
-        episodesField.setEnabled(false);
-        frame.add(episodesField);
-        
+        JPanel buttonPanel = new JPanel();
         submitButton = new JButton("Submit");
         clearButton = new JButton("Clear");
-        frame.add(submitButton);
-        frame.add(clearButton);
+        buttonPanel.add(submitButton);
+        buttonPanel.add(clearButton);
         
-        outputArea = new JTextArea(5, 20);
+        outputArea = new JTextArea(10, 30);
         outputArea.setEditable(false);
-        frame.add(new JScrollPane(outputArea));
+        JScrollPane scrollPane = new JScrollPane(outputArea);
+        
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+        frame.add(scrollPane, BorderLayout.EAST);
         
         contentTypeBox.addActionListener(e -> toggleSeriesFields());
         submitButton.addActionListener(e -> handleSubmit());
