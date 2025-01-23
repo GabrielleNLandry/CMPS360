@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class NetflixMovieGUI {
     private JFrame frame;
@@ -19,7 +18,7 @@ public class NetflixMovieGUI {
         }
         
         frame = new JFrame("Netflix Movie Management");
-        frame.setSize(500, 600);
+        frame.setSize(650, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         
@@ -53,7 +52,7 @@ public class NetflixMovieGUI {
             panel.add(new JLabel(labels[i]), gbc);
             
             gbc.gridx = 1;
-            components[i].setPreferredSize(new Dimension(200, 25));
+            components[i].setPreferredSize(new Dimension(300, 25));
             panel.add(components[i], gbc);
         }
         
