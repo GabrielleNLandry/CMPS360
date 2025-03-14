@@ -9,3 +9,26 @@
  h1 {
     color: #333;
  }
+
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 80%;
+}
+
+.image-container img {
+    width: 40%; /* Adjust the width of the images */
+    max-height: 400px; /* Prevent them from getting too tall */
+    object-fit:cover;
+    border-radius: 40px;
+}
+
+
+ p {
+    max-width: 45%; /* Adjust this value to increase or decrease width */
+    margin: 20px auto; /* Centers the paragraph and adds vertical spacing */
+    text-align: center; /* Keeps text alignment natural */
+    padding: 10px;
+}
